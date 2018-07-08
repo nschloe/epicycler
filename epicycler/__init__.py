@@ -5,6 +5,7 @@ from __future__ import print_function
 from .__about__ import __author__, __email__, __license__, __version__, __status__
 
 from .main import plot, animate
+from . import cli
 
 __all__ = [
     "__author__",
@@ -14,6 +15,7 @@ __all__ = [
     "__status__",
     "animate",
     "plot",
+    "cli",
 ]
 
 # try:

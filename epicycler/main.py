@@ -21,6 +21,11 @@ def plot(polygon):
     return
 
 
+def animate_image(filename):
+
+    return
+
+
 def animate(polygon):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
@@ -72,7 +77,10 @@ def animate(polygon):
 
     plt.show()
     # anim.save(
-    #     'out.mp4', fps=30,
+    #     'out.mp4',
+    #     # 'out.gif',
+    #     fps=30,
+    #     # writer='imagemagick',
     #     # extra_args=['-vcodec', 'libx264']
     #     )
 
