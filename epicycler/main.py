@@ -37,25 +37,22 @@ def animate(polygon):
     ]
     for circle in circles:
         ax.add_artist(circle)
-    ax.axis("equal")
-    padding = 0.1
-    xlim = [numpy.min(polygon[:, 0]), numpy.max(polygon[:, 0])]
-    ylim = [numpy.min(polygon[:, 1]), numpy.max(polygon[:, 1])]
-    width = xlim[1] - xlim[0]
-    height = ylim[1] - ylim[0]
-    ax.set_xlim(xlim[0] - padding * width, xlim[1] + padding * width)
-    ax.set_ylim(ylim[0] - padding * height, ylim[1] + padding * height)
+    sum_radii = numpy.sum(radii[1:])
+    center0 = [a[0].real / n, a[0].imag / n]
+    xlim = [center0[0] - 1.1 * sum_radii, center0[0] + 1.1 * sum_radii]
+    ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
+    ax.axis('square')
+    ax.set_xlim([xlim[0], xlim[1]])
+    ax.set_ylim([ylim[0], ylim[1]])
 
     plt.plot(polygon[:, 0], polygon[:, 1], ".")
 
     def init():
-        # dot.set_data([], [])
         return circles + [dot]
 
     def animate(t):
         vals = a / n * numpy.exp(1j * numpy.multiply.outer(t, n * freqs))
         cs = numpy.cumsum(vals)
-        # centers = numpy.concatenate([[0.0], cs[:-1]])
         centers = cs[:-1]
         for circle, center in zip(circles, centers):
             circle.center = [center.real, center.imag]
@@ -72,8 +69,10 @@ def animate(polygon):
     )
 
     plt.show()
-
-    # anim.save('basic_animation.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
+    # anim.save(
+    #     'out.mp4', fps=30,
+    #     # extra_args=['-vcodec', 'libx264']
+    #     )
 
     # plt.axis("equal")
     # plt.show()
