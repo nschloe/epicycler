@@ -27,15 +27,14 @@ def animate(polygon):
     freqs = numpy.fft.fftfreq(n)
 
     fig, ax = plt.subplots()
-    ax.axis('square')
+    ax.axis("square")
 
     radii = numpy.abs(a / n)
 
     center = numpy.array([0.0, 0.0])
-    dot = plt.plot([], [], '.k')[0]
+    dot = plt.plot([], [], ".k")[0]
     circles = [
-        plt.Circle(center, radius, color='k', fill=False)
-        for radius in radii[1:]
+        plt.Circle(center, radius, color="k", fill=False) for radius in radii[1:]
     ]
     for circle in circles:
         ax.add_artist(circle)
@@ -63,10 +62,12 @@ def animate(polygon):
     num_frames = 1000
 
     anim = FuncAnimation(
-        fig, animate, init_func=init,
+        fig,
+        animate,
+        init_func=init,
         frames=numpy.linspace(0.0, 2 * numpy.pi, num_frames),
         interval=10,
-        blit=True
+        blit=True,
     )
 
     plt.show()
