@@ -27,6 +27,8 @@ def animate(polygon):
     freqs = numpy.fft.fftfreq(n)
 
     fig, ax = plt.subplots()
+    ax.axis('square')
+
     radii = numpy.abs(a / n)
 
     center = numpy.array([0.0, 0.0])
@@ -41,7 +43,6 @@ def animate(polygon):
     center0 = [a[0].real / n, a[0].imag / n]
     xlim = [center0[0] - 1.1 * sum_radii, center0[0] + 1.1 * sum_radii]
     ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
-    ax.axis('square')
     ax.set_xlim([xlim[0], xlim[1]])
     ax.set_ylim([ylim[0], ylim[1]])
 
