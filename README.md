@@ -8,6 +8,13 @@
 [![GitHub stars](https://img.shields.io/github/stars/nschloe/epicycler.svg?logo=github&label=Stars)](https://github.com/nschloe/epicycler)
 
 
+### Creating a GIF
+
+```
+ffmpeg -i out.mp4 -r 10 'frame-%03d.png'
+convert -delay 5 -loop 0 frame-*.png out.gif
+```
+
 ### Installation
 
 epicycler is [available from the Python Package

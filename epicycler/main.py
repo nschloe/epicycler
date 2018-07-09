@@ -40,7 +40,7 @@ def animate_image(filename):
     return
 
 
-def animate(polygon, xylim="polygon", show_axes=True):
+def animate(polygon, xylim="polygon", show_axes=True, filename=None):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
     freqs = numpy.fft.fftfreq(n)
@@ -82,7 +82,7 @@ def animate(polygon, xylim="polygon", show_axes=True):
     ax.set_ylim([ylim[0], ylim[1]])
 
     if not show_axes:
-        ax.axis('off')
+        ax.axis("off")
 
     plt.plot(polygon[:, 0], polygon[:, 1], ".", color="0.7")
 
@@ -109,15 +109,13 @@ def animate(polygon, xylim="polygon", show_axes=True):
         blit=True,
     )
 
-    plt.show()
-    # anim.save(
-    #     'out.mp4',
-    #     # 'out.gif',
-    #     fps=30,
-    #     # writer='imagemagick',
-    #     # extra_args=['-vcodec', 'libx264']
-    #     )
-
-    # plt.axis("equal")
-    # plt.show()
+    if filename:
+        anim.save(
+            filename,
+            fps=60,
+            # writer="imagemagick",
+            # extra_args=['-vcodec', 'libx264']
+        )
+    else:
+        plt.show()
     return

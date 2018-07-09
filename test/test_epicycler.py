@@ -15,7 +15,9 @@ def test_animate():
     polygon = numpy.array(
         [[0.0, 0.0], [1.0, 0.0], [1.0, 2.0], [-0.5, 1.1], [-0.5, 2.1]]
     )
-    epicycler.animate(polygon, xylim=[[-1.5, +2.0], [-1.3, 3.0]], show_axes=False)
+    epicycler.animate(
+        polygon, xylim=[[-1.5, +2.0], [-1.3, 3.0]], show_axes=False, filename="out.mp4"
+    )
     return
 
 
