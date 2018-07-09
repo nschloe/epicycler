@@ -9,6 +9,38 @@
 
 ![circles](https://nschloe.github.io/epicycler/circles.gif)
 
+# Create animations from polygons
+
+Given a number of 2D polygonal points, epicycler creates nice animations. For example,
+the above is created with
+```
+epicycler-poly \
+  0.0 0.0 \
+  1.0 0.0 \
+  1.0 2.0 \
+  -0.5 1.1 \
+  -0.5 2.1 \
+  --xylim -1.5 +2.0 -1.3 3.0
+```
+See
+```
+epicycler-poly -h
+```
+for more options.
+
+# Create animations from image files
+![seagull](https://nschloe.github.io/epicycler/seagull.png)
+
+Given a (small) linedrawing image file like the above seagull,
+epicycler can create an animation from it
+```
+epicycler-image in.png -c 0.5
+```
+Use the `-c` option for reducing the number of circles by cutting off those smaller than
+the given threshold radius.
+
+![seagull-gif](https://nschloe.github.io/epicycler/seagull.gif)
+
 
 ### Creating a GIF
 

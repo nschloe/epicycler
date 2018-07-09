@@ -113,6 +113,7 @@ def animate_poly(
         ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
     else:
         assert len(xylim) == 4
+        xylim = [float(x) for x in xylim]
         xlim = xylim[:2]
         ylim = xylim[2::]
 

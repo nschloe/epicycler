@@ -34,6 +34,7 @@ def _get_parser_image():
 
     parser.add_argument(
         "--xylim",
+        nargs="+",
         help="xlim, ylim for plot (default: deduce from coordinates)",
         default="polygon",
     )
@@ -91,6 +92,7 @@ def _get_parser_poly():
 
     parser.add_argument(
         "--xylim",
+        nargs="+",
         help="xlim, ylim for plot (default: deduce from coordinates)",
         default="polygon",
     )
