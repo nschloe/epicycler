@@ -13,7 +13,7 @@
 
 Given a number of 2D polygonal points, epicycler creates nice animations. For example,
 the above is created with
-```
+```bash
 epicycler-poly \
   0.0 0.0 \
   1.0 0.0 \
@@ -23,7 +23,7 @@ epicycler-poly \
   --xylim -1.5 +2.0 -1.3 3.0
 ```
 See
-```
+```bash
 epicycler-poly -h
 ```
 for more options.
@@ -33,7 +33,7 @@ for more options.
 
 Given a (small) linedrawing image file like the above seagull,
 epicycler can create an animation from it
-```
+```bash
 epicycler-image in.png -c 0.5
 ```
 Use the `-c` option for reducing the number of circles by cutting off those smaller than
@@ -44,7 +44,7 @@ the given threshold radius.
 
 ### Creating a GIF
 
-```
+```bash
 ffmpeg -i out.mp4 -r 10 'frame-%03d.png'
 convert -delay 5 -loop 0 frame-*.png out.gif
 ```
