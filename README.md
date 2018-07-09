@@ -9,7 +9,7 @@
 
 ![circles](https://nschloe.github.io/epicycler/circles.gif)
 
-# Create animations from polygons
+### Create animations from polygons
 
 Given a number of 2D polygonal points, epicycler creates nice animations. For example,
 the above is created with
@@ -28,7 +28,7 @@ epicycler-poly -h
 ```
 for more options.
 
-# Create animations from image files
+### Create animations from image files
 ![seagull](https://nschloe.github.io/epicycler/seagull.png)
 
 Given a (small) linedrawing image file like the above seagull,
