@@ -36,7 +36,7 @@ epicycler can create an animation from it
 epicycler-image in.png -c 0.5
 ```
 Use the `-c` option for reducing the number of circles by cutting off those smaller than
-the given threshold radius.
+the given threshold radius; notice then how the polygon points are not followed exactly:
 
 ![seagull-gif](https://nschloe.github.io/epicycler/seagull.gif)
 
