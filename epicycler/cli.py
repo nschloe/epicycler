@@ -20,7 +20,7 @@ def image(argv=None):
         args.infile,
         xylim=args.xylim,
         output_filename=args.output_file,
-        cutoff_radius=1.0,
+        cutoff_radius=args.cutoff_radius,
     )
     return
 
@@ -36,6 +36,13 @@ def _get_parser_image():
         "--xylim",
         help="xlim, ylim for plot (default: deduce from coordinates)",
         default="polygon",
+    )
+
+    parser.add_argument(
+        "--cutoff-radius", "-c",
+        type=float,
+        help="epicycles smaller than this radius will be left out (default: 0.0)",
+        default=0.0,
     )
 
     parser.add_argument(
