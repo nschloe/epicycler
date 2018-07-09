@@ -13,8 +13,8 @@ millenia to describe the motion of planets; even
 [Copernicus](https://en.wikipedia.org/wiki/Nicolaus_Copernicus) still used them. They
 got out of fashion when [Kepler](https://en.wikipedia.org/wiki/Johannes_Kepler)
 thought about ellipses, but one can still fool around with epicycles a bit. See
-[mathologer's awesome video about it](https://youtu.be/qS4H6PEcCCA) which in fact
-motivated this little package.
+[mathologer's awesome video about it](https://youtu.be/qS4H6PEcCCA) (which in fact
+motivated this little package).
 
 ### Create animations from polygons
 
@@ -34,6 +34,15 @@ See
 epicycler-poly -h
 ```
 for more options.
+
+### Installation
+
+epicycler is [available from the Python Package
+Index](https://pypi.org/project/epicycler/), so simply type
+```
+pip install -U epicycler
+```
+to install or upgrade.
 
 ### Create animations from image files
 ![seagull](https://nschloe.github.io/epicycler/seagull.png)
@@ -55,15 +64,6 @@ the given threshold radius; notice then how the polygon points are not followed 
 ffmpeg -i out.mp4 -r 10 'frame-%03d.png'
 convert -delay 5 -loop 0 frame-*.png out.gif
 ```
-
-### Installation
-
-epicycler is [available from the Python Package
-Index](https://pypi.org/project/epicycler/), so simply type
-```
-pip install -U epicycler
-```
-to install or upgrade.
 
 ### Testing
 
