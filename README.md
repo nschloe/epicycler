@@ -7,6 +7,8 @@
 [![PyPi Version](https://img.shields.io/pypi/v/epicycler.svg)](https://pypi.org/project/epicycler)
 [![GitHub stars](https://img.shields.io/github/stars/nschloe/epicycler.svg?logo=github&label=Stars)](https://github.com/nschloe/epicycler)
 
+![circles](https://nschloe.github.io/epicycler/circles.gif)
+
 
 ### Creating a GIF
 
