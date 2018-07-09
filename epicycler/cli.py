@@ -39,7 +39,8 @@ def _get_parser_image():
     )
 
     parser.add_argument(
-        "--cutoff-radius", "-c",
+        "--cutoff-radius",
+        "-c",
         type=float,
         help="epicycles smaller than this radius will be left out (default: 0.0)",
         default=0.0,
