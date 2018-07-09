@@ -20,7 +20,9 @@ def main(argv=None):
 def _get_parser():
     import argparse
 
-    parser = argparse.ArgumentParser(description=("Create epicylce animation from image."))
+    parser = argparse.ArgumentParser(
+        description=("Create epicycle animation from image.")
+    )
 
     parser.add_argument("infile", type=str, help="input image file")
 

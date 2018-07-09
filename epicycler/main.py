@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy
+from tsp_solver.greedy import solve_tsp
 
 
 def plot(polygon):
@@ -22,11 +23,24 @@ def plot(polygon):
 
 
 def animate_image(filename):
+    img = plt.imread(filename)
 
+    # Find all pixel positions where the alpha value is greater than a threshold
+    threshold = 0.9999
+    xy = numpy.array(numpy.where(img[:, :, 3] > threshold))
+
+    # Solve the traveling salesman problem for a reasonable path traversing the pixels.
+    # prepare matrix of distances
+    dx = numpy.subtract.outer(xy[0], xy[0])
+    dy = numpy.subtract.outer(xy[1], xy[1])
+    d = numpy.sqrt(dx ** 2 + dy ** 2)
+    path = solve_tsp(d)
+
+    animate(xy[:, path].T)
     return
 
 
-def animate(polygon):
+def animate(polygon, xylim="polygon"):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
     freqs = numpy.fft.fftfreq(n)
@@ -37,20 +51,32 @@ def animate(polygon):
     radii = numpy.abs(a / n)
 
     center = numpy.array([0.0, 0.0])
-    dot = plt.plot([], [], ".k")[0]
+    dot = plt.plot([], [], ".r")[0]
     circles = [
         plt.Circle(center, radius, color="k", fill=False) for radius in radii[1:]
     ]
     for circle in circles:
         ax.add_artist(circle)
-    sum_radii = numpy.sum(radii[1:])
-    center0 = [a[0].real / n, a[0].imag / n]
-    xlim = [center0[0] - 1.1 * sum_radii, center0[0] + 1.1 * sum_radii]
-    ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
+
+    if xylim == "polygon":
+        xlim = [numpy.min(polygon[:, 0]), numpy.max(polygon[:, 0])]
+        ylim = [numpy.min(polygon[:, 1]), numpy.max(polygon[:, 1])]
+        width = xlim[1] - xlim[0]
+        height = ylim[1] - ylim[0]
+        xlim = [xlim[0] - 0.1 * width, xlim[1] + 0.1 * width]
+        ylim = [ylim[0] - 0.1 * height, ylim[1] + 0.1 * height]
+    else:
+        assert xylim == "circles"
+        sum_radii = numpy.sum(radii[1:])
+        center0 = [a[0].real / n, a[0].imag / n]
+        xlim = [center0[0] - 1.1 * sum_radii, center0[0] + 1.1 * sum_radii]
+        ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
+
+
     ax.set_xlim([xlim[0], xlim[1]])
     ax.set_ylim([ylim[0], ylim[1]])
 
-    plt.plot(polygon[:, 0], polygon[:, 1], ".")
+    plt.plot(polygon[:, 0], polygon[:, 1], ".", color="0.7")
 
     def init():
         return circles + [dot]

@@ -38,4 +38,5 @@ setup(
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
+    entry_points={"console_scripts": ["epicycler = epicycler.cli:main"]},
 )
