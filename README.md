@@ -16,6 +16,15 @@ thought about ellipses, but one can still fool around with epicycles a bit. See
 [mathologer's awesome video about it](https://youtu.be/qS4H6PEcCCA) (which in fact
 motivated this little package).
 
+### Installation
+
+epicycler is [available from the Python Package
+Index](https://pypi.org/project/epicycler/), so simply type
+```
+pip install -U epicycler
+```
+to install or upgrade.
+
 ### Create animations from polygons
 
 Given a number of 2D polygonal points, epicycler creates nice animations. For example,
@@ -34,15 +43,6 @@ See
 epicycler-poly -h
 ```
 for more options.
-
-### Installation
-
-epicycler is [available from the Python Package
-Index](https://pypi.org/project/epicycler/), so simply type
-```
-pip install -U epicycler
-```
-to install or upgrade.
 
 ### Create animations from image files
 ![seagull](https://nschloe.github.io/epicycler/seagull.png)
