@@ -65,13 +65,14 @@ def animate(polygon, xylim="polygon"):
         height = ylim[1] - ylim[0]
         xlim = [xlim[0] - 0.1 * width, xlim[1] + 0.1 * width]
         ylim = [ylim[0] - 0.1 * height, ylim[1] + 0.1 * height]
-    else:
-        assert xylim == "circles"
+    elif xylim == "circles":
         sum_radii = numpy.sum(radii[1:])
         center0 = [a[0].real / n, a[0].imag / n]
         xlim = [center0[0] - 1.1 * sum_radii, center0[0] + 1.1 * sum_radii]
         ylim = [center0[1] - 1.1 * sum_radii, center0[1] + 1.1 * sum_radii]
-
+    else:
+        assert len(xylim) == 2
+        xlim, ylim = xylim
 
     ax.set_xlim([xlim[0], xlim[1]])
     ax.set_ylim([ylim[0], ylim[1]])
