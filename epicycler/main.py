@@ -40,12 +40,16 @@ def animate_image(filename):
     return
 
 
-def animate(polygon, xylim="polygon"):
+def animate(polygon, xylim="polygon", show_axes=True):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
     freqs = numpy.fft.fftfreq(n)
 
     fig, ax = plt.subplots()
+
+    # Make the plot tigher, <https://stackoverflow.com/a/15883620/353337>
+    fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=None, hspace=None)
+
     ax.axis("square")
 
     radii = numpy.abs(a / n)
@@ -76,6 +80,9 @@ def animate(polygon, xylim="polygon"):
 
     ax.set_xlim([xlim[0], xlim[1]])
     ax.set_ylim([ylim[0], ylim[1]])
+
+    if not show_axes:
+        ax.axis('off')
 
     plt.plot(polygon[:, 0], polygon[:, 1], ".", color="0.7")
 
