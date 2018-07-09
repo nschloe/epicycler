@@ -8,6 +8,14 @@
 
 ![circles](https://nschloe.github.io/epicycler/circles.gif)
 
+[Epicylces](https://en.wikipedia.org/wiki/Deferent_and_epicycle) have been used for
+millenia to describe the motion of planets; even
+[Copernicus](https://en.wikipedia.org/wiki/Nicolaus_Copernicus) still used them. They
+got out of fashion when [Kepler](https://en.wikipedia.org/wiki/Johannes_Kepler)
+thought about ellipses, but one can still fool around with epicycles a bit. See
+[mathologer's awesome video about it](https://youtu.be/qS4H6PEcCCA) which in fact
+motivated this little package.
+
 ### Create animations from polygons
 
 Given a number of 2D polygonal points, epicycler creates nice animations. For example,
