@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy
-from tsp_solver.greedy import solve_tsp
+import tspsolve
 
 
 def plot(polygon):
@@ -22,31 +22,56 @@ def plot(polygon):
     return
 
 
-def animate_image(filename, xylim="polygon", output_filename=None, cutoff_radius=0.0):
+def animate_image(
+    filename,
+    xylim="polygon",
+    output_filename=None,
+    cutoff_radius=0.0,
+    pixel_opacity_threshold=0.9,
+):
     img = plt.imread(filename)
 
     # Find all pixel positions where the alpha value is greater than a threshold
-    threshold = 0.9999
-    xy = numpy.array(numpy.where(img[:, :, 3] > threshold))
+    yx = numpy.array(numpy.where(img[:, :, 3] > pixel_opacity_threshold))
+    xy = yx[[1, 0]]
 
-    # Solve the traveling salesman problem for a reasonable path traversing the pixels.
     # prepare matrix of distances
     dx = numpy.subtract.outer(xy[0], xy[0])
     dy = numpy.subtract.outer(xy[1], xy[1])
     d = numpy.sqrt(dx ** 2 + dy ** 2)
-    path = solve_tsp(d)
+    # solve tsp
+    path = tspsolve.nearest_neighbor(d)
+    path = tspsolve.two_opt(d, path).tolist()
+
+    # plt.plot(xy[0, path + [path[0]]], xy[1, path + [path[0]]], "-")
+    # plt.axis("square")
+    # plt.gca().invert_yaxis()
+    # plt.show()
+
+    # r = list(range(xy.shape[1]))
+    # dist = {(i, j): d[i][j] for i in r for j in r}
+    # path = tsp.tsp(r, dist)
+    # print(path)
+    # exit(1)
 
     animate_poly(
         xy[:, path].T,
         xylim=xylim,
         output_filename=output_filename,
         cutoff_radius=cutoff_radius,
+        invert_yaxis=True,
+        show_axes=False,
     )
     return
 
 
 def animate_poly(
-    polygon, xylim="polygon", show_axes=True, output_filename=None, cutoff_radius=0.0
+    polygon,
+    xylim="polygon",
+    show_axes=True,
+    output_filename=None,
+    cutoff_radius=0.0,
+    invert_yaxis=False,
 ):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
@@ -93,6 +118,9 @@ def animate_poly(
 
     ax.set_xlim([xlim[0], xlim[1]])
     ax.set_ylim([ylim[0], ylim[1]])
+
+    if invert_yaxis:
+        ax.invert_yaxis()
 
     if not show_axes:
         ax.axis("off")
