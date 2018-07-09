@@ -16,7 +16,12 @@ def image(argv=None):
     parser = _get_parser_image()
     args = parser.parse_args(argv)
 
-    animate_image(args.infile, xylim=args.xylim, output_filename=args.output_file)
+    animate_image(
+        args.infile,
+        xylim=args.xylim,
+        output_filename=args.output_file,
+        cutoff_radius=1.0,
+    )
     return
 
 
@@ -29,10 +34,8 @@ def _get_parser_image():
 
     parser.add_argument(
         "--xylim",
-        type=float,
-        nargs=4,
         help="xlim, ylim for plot (default: deduce from coordinates)",
-        default=None,
+        default="polygon",
     )
 
     parser.add_argument(
@@ -60,10 +63,9 @@ def poly(argv=None):
 
     assert len(args.coords) % 2 == 0, "Must specify an even number of values."
 
-    xylim = "polygon" if args.xylim is None else args.xylim
     animate_poly(
         numpy.reshape(args.coords, (-1, 2)),
-        xylim=xylim,
+        xylim=args.xylim,
         output_filename=args.output_file,
         show_axes=args.show_axes,
     )
@@ -81,10 +83,8 @@ def _get_parser_poly():
 
     parser.add_argument(
         "--xylim",
-        type=float,
-        nargs=4,
         help="xlim, ylim for plot (default: deduce from coordinates)",
-        default=None,
+        default="polygon",
     )
 
     parser.add_argument(

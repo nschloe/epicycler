@@ -22,7 +22,7 @@ def plot(polygon):
     return
 
 
-def animate_image(filename, xylim="polygon", output_filename=None):
+def animate_image(filename, xylim="polygon", output_filename=None, cutoff_radius=0.0):
     img = plt.imread(filename)
 
     # Find all pixel positions where the alpha value is greater than a threshold
@@ -36,11 +36,18 @@ def animate_image(filename, xylim="polygon", output_filename=None):
     d = numpy.sqrt(dx ** 2 + dy ** 2)
     path = solve_tsp(d)
 
-    animate_poly(xy[:, path].T, xylim=xylim, output_filename=output_filename)
+    animate_poly(
+        xy[:, path].T,
+        xylim=xylim,
+        output_filename=output_filename,
+        cutoff_radius=cutoff_radius,
+    )
     return
 
 
-def animate_poly(polygon, xylim="polygon", show_axes=True, output_filename=None):
+def animate_poly(
+    polygon, xylim="polygon", show_axes=True, output_filename=None, cutoff_radius=0.0
+):
     n = polygon.shape[0]
     a = numpy.fft.fft(polygon[:, 0] + 1j * polygon[:, 1])
     freqs = numpy.fft.fftfreq(n)
@@ -53,6 +60,11 @@ def animate_poly(polygon, xylim="polygon", show_axes=True, output_filename=None)
     ax.axis("square")
 
     radii = numpy.abs(a / n)
+
+    cut = radii > cutoff_radius
+    a = a[cut]
+    radii = radii[cut]
+    freqs = freqs[cut]
 
     new_red = "#d62728"
     dot = plt.plot([], [], ".", color=new_red)[0]
